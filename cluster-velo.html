@@ -3,816 +3,373 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cluster Vélo — Hauts-de-France</title>
+<title>Cluster Velo Hauts-de-France</title>
 <style>
-  @font-face {
-    font-family: 'Etelka Text Pro';
-    src: local('Etelka Text Pro Bold'), local('EtelkaTextPro-Bold');
-    font-weight: 700;
-    font-style: normal;
-  }
-  :root {
-    --blue: #0050a4;
-    --lime: #8DC63F;
-    --white: #ffffff;
-    --light-blue: #e8f0f8;
-    --light-lime: #eef7e0;
-    --dark: #000000;
-    --mid: #555555;
-    --border: #cccccc;
-    --bg: #f4f6f9;
-  }
+:root {
+  --blue: #0050a4;
+  --lime: #8DC63F;
+  --light-blue: #e8f0f8;
+  --light-lime: #eef7e0;
+  --border: #cccccc;
+  --bg: #f4f6f9;
+  --mid: #555;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; background: var(--bg); color: #000; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+header { background: var(--blue); color: #fff; padding: 28px 36px 22px; position: relative; overflow: hidden; }
+header::after { content: '&#128692;'; font-size: 160px; position: absolute; right: 10px; top: -20px; opacity: 0.07; pointer-events: none; }
+.eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--lime); margin-bottom: 6px; }
+header h1 { font-family: 'Arial Black', Arial, sans-serif; font-size: 42px; font-weight: 900; line-height: 1; }
+header h1 span { color: var(--lime); }
+header p { margin-top: 8px; font-size: 13px; opacity: 0.85; max-width: 480px; line-height: 1.5; }
+.header-btns { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-lime { display: inline-flex; align-items: center; gap: 6px; background: var(--lime); color: #fff; text-decoration: none; font-size: 12px; font-weight: bold; padding: 8px 16px; border-radius: 2px; }
+.btn-outline { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: #fff; text-decoration: none; font-size: 12px; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.4); border-radius: 2px; }
 
-  body {
-    background: var(--bg);
-    color: var(--dark);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+.main { max-width: 1080px; margin: 0 auto; padding: 36px 24px 60px; }
+.step-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); font-weight: bold; margin-bottom: 8px; }
 
-  /* HEADER */
-  header {
-    background: var(--blue);
-    color: var(--white);
-    padding: 28px 40px 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '🚴';
-    font-size: 180px;
-    position: absolute;
-    right: -20px;
-    top: -30px;
-    opacity: 0.08;
-    transform: rotate(-12deg);
-  }
-  .header-eyebrow {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--lime);
-    margin-bottom: 8px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  header h1 {
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-size: clamp(28px, 5vw, 52px);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-  header h1 span {
-    color: var(--lime);
-  }
-  .header-sub {
-    margin-top: 10px;
-    font-size: 13px;
-    opacity: 0.85;
-    max-width: 500px;
-    line-height: 1.6;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .header-meta {
-    margin-top: 16px;
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .map-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--lime);
-    color: var(--white);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 9px 18px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 2px;
-  }
-  .map-btn:hover { background: #72a832; transform: translateY(-1px); }
-  .contact-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--white);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    padding: 9px 18px;
-    border: 1px solid rgba(255,255,255,0.4);
-    transition: all 0.2s;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 2px;
-  }
-  .contact-btn:hover { border-color: var(--lime); color: var(--lime); }
+select {
+  appearance: none; -webkit-appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230050a4' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  border: 2px solid var(--blue); color: #000;
+  font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold;
+  padding: 10px 40px 10px 14px; border-radius: 2px; cursor: pointer; min-width: 260px; margin-bottom: 28px;
+}
+select:focus { outline: 2px solid var(--lime); }
 
-  /* MAIN LAYOUT */
-  .main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
-  }
+#needs-section { display: none; margin-bottom: 28px; }
+.profile-title { font-family: 'Arial Black', Arial, sans-serif; font-size: 20px; font-weight: 900; color: var(--blue); margin-bottom: 14px; }
+.needs-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.need-radio { display: none; }
+.need-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border: 1px solid var(--border); background: #fff; color: var(--mid);
+  font-size: 12px; cursor: pointer; border-radius: 2px; transition: all 0.15s; user-select: none;
+}
+.need-label:hover { border-color: var(--blue); color: var(--blue); background: var(--light-blue); }
+.need-radio:checked + .need-label { background: var(--lime); border-color: var(--lime); color: #fff; font-weight: bold; }
 
-  /* PROFILE SELECTOR */
-  .profiles-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 14px;
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-weight: 700;
-  }
-  .profiles-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 36px;
-  }
-  .profile-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border: 2px solid var(--border);
-    background: var(--white);
-    color: var(--dark);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-    position: relative;
-    font-weight: 700;
-    border-radius: 2px;
-  }
-  .profile-btn .picon { font-size: 18px; }
-  .profile-btn:hover {
-    border-color: var(--blue);
-    background: var(--light-blue);
-    color: var(--blue);
-  }
-  .profile-btn.active {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: var(--white);
-  }
+#results-section { display: none; }
+.results-bar { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; border-top: 2px solid var(--border); padding-top: 20px; }
+.results-title { font-family: 'Arial Black', Arial, sans-serif; font-size: 18px; font-weight: 900; color: var(--blue); }
+.results-count { font-size: 11px; color: var(--lime); font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+.actors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--lime); padding: 16px 18px; border-radius: 2px; display: flex; flex-direction: column; gap: 6px; transition: box-shadow 0.15s, border-left-color 0.15s; }
+.card:hover { box-shadow: 0 4px 14px rgba(0,80,164,0.12); border-left-color: var(--blue); }
+.card-tag { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 2px 7px; background: var(--light-lime); color: #3a7a00; font-weight: bold; border-radius: 2px; width: fit-content; }
+.card-tag.asso { background: #fff0e8; color: #b03000; }
+.card-tag.event { background: #fff8e0; color: #8B6914; }
+.card-tag.online { background: var(--light-blue); color: var(--blue); }
+.card-tag.national { background: #f0e8ff; color: #5A2A8B; }
+.card-name { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; font-weight: 900; color: #000; line-height: 1.2; }
+.card-desc { font-size: 12px; color: var(--mid); line-height: 1.5; flex-grow: 1; }
+.card-loc { font-size: 10px; color: #999; }
+.card-link { font-size: 11px; color: var(--blue); font-weight: bold; text-decoration: none; border-bottom: 1px solid var(--lime); }
+.card-link:hover { color: #3a7a00; }
 
-  /* NEED SELECTOR */
-  .needs-section {
-    display: none;
-    animation: fadeUp 0.3s ease;
-  }
-  .needs-section.visible { display: block; }
+.contribute { margin-top: 24px; padding: 14px 18px; border: 1px solid var(--lime); background: var(--light-lime); font-size: 12px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; border-radius: 2px; }
+.contribute a { color: var(--blue); font-weight: bold; text-decoration: none; border-bottom: 1px solid var(--blue); }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+.map-cta { background: var(--blue); color: #fff; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 32px; border-radius: 2px; }
+.map-cta h3 { font-family: 'Arial Black', Arial, sans-serif; font-size: 16px; font-weight: 900; margin-bottom: 3px; }
+.map-cta p { font-size: 12px; opacity: 0.8; }
 
-  .needs-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 14px;
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-weight: 700;
-  }
-  .profile-title {
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--blue);
-    margin-bottom: 20px;
-  }
+footer { background: var(--blue); color: rgba(255,255,255,0.65); padding: 18px 36px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+footer a { color: var(--lime); text-decoration: none; }
 
-  .needs-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-  .need-btn {
-    padding: 8px 16px;
-    border: 1px solid var(--border);
-    background: white;
-    color: var(--mid);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .need-btn:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-    background: var(--light-blue);
-  }
-  .need-btn.active {
-    background: var(--lime);
-    border-color: var(--lime);
-    color: #000;
-    font-weight: 700;
-  }
-
-  /* RESULTS */
-  .results-section {
-    display: none;
-    animation: fadeUp 0.3s ease;
-  }
-  .results-section.visible { display: block; }
-
-  .results-header {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .results-title {
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--blue);
-  }
-  .results-count {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--lime);
-    font-weight: 700;
-  }
-
-  .actors-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 14px;
-  }
-
-  .actor-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--lime);
-    padding: 18px 20px;
-    position: relative;
-    transition: all 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-radius: 2px;
-  }
-  .actor-card:hover {
-    border-left-color: var(--blue);
-    box-shadow: 0 4px 16px rgba(0,80,164,0.10);
-    transform: translateY(-2px);
-  }
-  .actor-tag {
-    display: inline-block;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    background: var(--light-lime);
-    color: #3a7a00;
-    font-weight: 700;
-    width: fit-content;
-    border-radius: 2px;
-  }
-  .actor-tag.tag-asso { background: #fff0e8; color: #b03000; }
-  .actor-tag.tag-event { background: #fff8e0; color: #8B6914; }
-  .actor-tag.tag-online { background: var(--light-blue); color: var(--blue); }
-  .actor-tag.tag-national { background: #f0e8ff; color: #5A2A8B; }
-
-  .actor-name {
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--dark);
-    line-height: 1.2;
-  }
-  .actor-desc {
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--mid);
-    flex-grow: 1;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .actor-links {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-  .actor-link {
-    font-size: 11px;
-    color: var(--blue);
-    text-decoration: none;
-    border-bottom: 1px solid var(--lime);
-    transition: color 0.15s;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
-  }
-  .actor-link:hover { color: #3a7a00; border-color: var(--blue); }
-  .actor-location {
-    font-size: 10px;
-    color: #888;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  /* DIVIDER */
-  .section-divider {
-    border: none;
-    border-top: 2px solid var(--border);
-    margin: 32px 0;
-  }
-
-  /* MAP CTA */
-  .map-cta {
-    background: var(--blue);
-    color: var(--white);
-    padding: 24px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 36px;
-    border-radius: 2px;
-  }
-  .map-cta-text h3 {
-    font-family: 'Etelka Text Pro', 'Arial Black', Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .map-cta-text p { font-size: 12px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif; }
-  .map-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--lime);
-    color: #fff;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 10px 20px;
-    transition: all 0.2s;
-    white-space: nowrap;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 2px;
-  }
-  .map-cta a:hover { background: #72a832; }
-
-  /* FOOTER */
-  footer {
-    background: var(--blue);
-    color: rgba(255,255,255,0.7);
-    padding: 24px 40px;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: gap;
-    gap: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  footer a { color: var(--lime); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-
-  /* RESET BTN */
-  .reset-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--mid);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    padding: 6px 12px;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: all 0.15s;
-    margin-bottom: 12px;
-    display: none;
-  }
-  .reset-btn.visible { display: inline-flex; align-items: center; gap: 6px; }
-  .reset-btn:hover { border-color: var(--blue); color: var(--blue); }
-
-  /* CONTRIBUTE BANNER */
-  .contribute {
-    margin-top: 20px;
-    padding: 16px 20px;
-    border: 1px solid var(--lime);
-    background: var(--light-lime);
-    font-size: 12px;
-    color: var(--dark);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .contribute strong { font-size: 13px; }
-  .contribute a {
-    color: var(--blue);
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 1px solid var(--blue);
-  }
-
-  @media (max-width: 600px) {
-    header { padding: 20px; }
-    .main { padding: 24px 16px; }
-    .profile-btn { padding: 8px 14px; font-size: 11px; }
-    footer { flex-direction: column; text-align: center; }
-  }
+@media (max-width: 600px) {
+  header { padding: 20px; }
+  header h1 { font-size: 30px; }
+  .main { padding: 24px 16px; }
+  footer { flex-direction: column; }
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-eyebrow">Cluster Régional · Hauts-de-France</div>
-  <h1>Filière <span>Vélo</span><br>HdF</h1>
-  <p class="header-sub">Trouvez les bons acteurs du territoire selon votre profil et votre besoin. Un annuaire vivant, ancré dans les Hauts-de-France.</p>
-  <div class="header-meta">
-    <a href="https://macarte.ign.fr/" target="_blank" class="map-btn">🗺 Voir la cartographie IGN</a>
-    <a href="/cdn-cgi/l/email-protection#6a0905041e0b091e2a09061f191e0f18471c0f060547020e0c440c18" class="contact-btn">✉ Nous contacter</a>
+  <div class="eyebrow">Cluster Regional &middot; Hauts-de-France</div>
+  <h1>Filiere <span>Velo</span> HdF</h1>
+  <p>Trouvez les bons acteurs du territoire selon votre profil et votre besoin. Un annuaire vivant, ancre dans les Hauts-de-France.</p>
+  <div class="header-btns">
+    <a href="https://macarte.ign.fr/" target="_blank" class="btn-lime">Voir la cartographie IGN</a>
+    <a href="mailto:contact@cluster-velo-hdf.fr" class="btn-outline">Nous contacter</a>
   </div>
 </header>
 
 <div class="main">
 
-  <div class="profiles-label">01 — Votre profil</div>
-  <div class="profiles-grid" id="profileGrid">
-    <button class="profile-btn" data-profile="particulier" onclick="selectProfile('particulier')">
-      <span class="picon">🚴</span> Particulier
-    </button>
-    <button class="profile-btn" data-profile="employeur" onclick="selectProfile('employeur')">
-      <span class="picon">🏢</span> Pro
-    </button>
-    <button class="profile-btn" data-profile="collectivite" onclick="selectProfile('collectivite')">
-      <span class="picon">🏛</span> Collectivité
-    </button>
-    <button class="profile-btn" data-profile="scolaire" onclick="selectProfile('scolaire')">
-      <span class="picon">🏫</span> Établissement scolaire
-    </button>
-    <button class="profile-btn" data-profile="industriel" onclick="selectProfile('industriel')">
-      <span class="picon">⚙️</span> Industriel
-    </button>
+  <div class="step-label">01 &mdash; Votre profil</div>
+  <select id="profileSelect" onchange="onProfileChange()">
+    <option value="">-- Choisissez votre profil --</option>
+    <option value="particulier">Particulier</option>
+    <option value="pro">Pro (employeur)</option>
+    <option value="collectivite">Collectivite</option>
+    <option value="scolaire">Etablissement scolaire</option>
+    <option value="industriel">Industriel</option>
+  </select>
+
+  <div id="needs-section">
+    <div class="step-label">02 &mdash; Votre besoin</div>
+    <div class="profile-title" id="profile-title"></div>
+    <div class="needs-grid" id="needs-grid"></div>
   </div>
 
-  <button class="reset-btn" id="resetBtn" onclick="reset()">↩ Recommencer</button>
-
-  <!-- NEEDS -->
-  <div class="needs-section" id="needsSection">
-    <div class="needs-label">02 — Votre besoin</div>
-    <div class="profile-title" id="profileTitle"></div>
-    <div class="needs-grid" id="needsGrid"></div>
-  </div>
-
-  <!-- RESULTS -->
-  <div class="results-section" id="resultsSection">
-    <hr class="section-divider">
-    <div class="results-header">
-      <div class="results-title" id="resultsTitle"></div>
-      <div class="results-count" id="resultsCount"></div>
+  <div id="results-section">
+    <div class="results-bar">
+      <div class="results-title" id="results-title"></div>
+      <div class="results-count" id="results-count"></div>
     </div>
-    <div class="actors-grid" id="actorsGrid"></div>
-
+    <div class="actors-grid" id="actors-grid"></div>
     <div class="contribute">
-      <div>
-        <strong>📋 Vous connaissez un acteur non référencé ?</strong><br>
-        Ce recensement est en cours de construction. Participez à l'enrichir.
-      </div>
-      <a href="/cdn-cgi/l/email-protection#c5a6aaabb1a4a6b185a6a9b0b6b1a0b7e8b3a0a9aae8ada1a3eba3b7fab6b0a7afa0a6b1f895b7aab5aab6acb1acaaabe0f7f5a1e2a4a6b1a0b0b7e0f7f5e8e0f7f586a9b0b6b1a0b7e0f7f593066ca9aae0f7f58da183">→ Proposer un acteur</a>
+      <div><strong>Vous connaissez un acteur non reference ?</strong><br>Ce recensement est en cours de construction. Participez a l'enrichir.</div>
+      <a href="mailto:contact@cluster-velo-hdf.fr?subject=Proposition%20acteur%20Cluster%20Velo%20HdF">Proposer un acteur</a>
     </div>
   </div>
 
   <div class="map-cta">
-    <div class="map-cta-text">
-      <h3>🗺 Cartographie interactive du territoire</h3>
-      <p>Visualisez les acteurs géolocalisés sur la carte IGN des Hauts-de-France. Mise à jour en continu.</p>
+    <div>
+      <h3>Cartographie interactive du territoire</h3>
+      <p>Visualisez les acteurs geolocalises sur la carte IGN des Hauts-de-France.</p>
     </div>
-    <a href="https://macarte.ign.fr/" target="_blank">Ouvrir la carte →</a>
+    <a href="https://macarte.ign.fr/" target="_blank" class="btn-lime">Ouvrir la carte</a>
   </div>
 
 </div>
 
 <footer>
-  <span>Cluster Filière Vélo · Hauts-de-France — 2024</span>
-  <span>
-    <a href="/cdn-cgi/l/email-protection#50333f3e2431332410333c25232435227d26353c3f7d3834367e3622"><span class="__cf_email__" data-cfemail="4d2e2223392c2e390d2e21383e39283f603b2821226025292b632b3f">[email&#160;protected]</span></a>
-    &nbsp;·&nbsp;
-    <a href="https://macarte.ign.fr/" target="_blank">Cartographie IGN</a>
-  </span>
+  <span>Cluster Filiere Velo &middot; Hauts-de-France &mdash; 2024</span>
+  <span><a href="mailto:contact@cluster-velo-hdf.fr">contact@cluster-velo-hdf.fr</a> &nbsp;&middot;&nbsp; <a href="https://macarte.ign.fr/" target="_blank">Cartographie IGN</a></span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const DATA = {
+<script>
+var DATA = {
   particulier: {
     label: "Je suis un particulier",
-    needs: {
-      "S'équiper": {
-        icon: "🛒",
-        actors: [
-          { name: "Vera Cycling", tag: "local", tagClass: "", desc: "Gapettes de vélo made in France. Accessoires fabriqués localement, qualité artisanale.", location: "Hauts-de-France" },
-          { name: "La Vie est Belt", tag: "local", tagClass: "", desc: "Ceintures upcyclées à partir de chambre à air. Accessoire vélo éco-conçu et made in HdF.", location: "Hauts-de-France" },
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Revendeur de matériel vélo d'aventure et du quotidien haut de gamme.", location: "Hauts-de-France", link: "#" },
-          { name: "La Fraise", tag: "local", tagClass: "", desc: "Vélo sur mesure, fabrication artisanale.", location: "Roubaix" },
-          { name: "Decathlon", tag: "commerce", tagClass: "tag-national", desc: "Grande surface sport — large gamme vélo, accessoires, équipements.", location: "Hauts-de-France" },
-          { name: "V'Lille", tag: "location", tagClass: "tag-event", desc: "Service de location de vélo à Lille. Idéal pour tester avant d'acheter.", location: "Lille", link: "#" },
-        ]
-      },
-      "Réparer son vélo": {
-        icon: "🔧",
-        actors: [
-          { name: "Heureux Cyclage — ateliers HdF", tag: "associatif", tagClass: "tag-asso", desc: "Réseau d'ateliers d'auto-réparation associatifs. Apprenez à réparer vous-même avec de l'outillage partagé.", location: "Région", link: "https://www.heureux-cyclage.org/les-ateliers-en-france.html" },
-          { name: "Les Mains dans le Guidon", tag: "local", tagClass: "", desc: "Atelier d'auto-réparation privé. Accompagnement technique en autonomie.", location: "Hauts-de-France" },
-          { name: "La Bici", tag: "local", tagClass: "", desc: "Annuaire et réparateur vélo à Lille. Retrouvez les réparateurs de proximité.", location: "Lille" },
-          { name: "Decathlon SAV vélo", tag: "commerce", tagClass: "tag-national", desc: "Service réparation et entretien vélo en atelier.", location: "Hauts-de-France" },
-        ]
-      },
-      "Partir en vacances à vélo": {
-        icon: "🏕",
-        actors: [
-          { name: "Les Micro-aventures de Lulu", tag: "inspiration", tagClass: "tag-event", desc: "Récits et ressources pour partir en vélo-voyage en autonomie depuis les HdF.", location: "Hauts-de-France", link: "https://www.lesmicroaventuresdelulu.com/" },
-          { name: "France Vélo Tourisme", tag: "national", tagClass: "tag-national", desc: "Portail officiel du vélo tourisme en France : itinéraires, hébergements labellisés Accueil Vélo.", location: "National", link: "https://www.francevelotourisme.com/accueil-velo" },
-          { name: "TER SNCF HdF — Vélo à bord", tag: "transport", tagClass: "tag-online", desc: "Tout savoir sur les conditions d'embarquement de votre vélo dans les TER des Hauts-de-France.", location: "Région", link: "https://www.ter.sncf.com/hauts-de-france/services-contacts/services/embarquer-votre-velo-bord" },
-          { name: "Location vélo Nord & Pas-de-Calais", tag: "annuaire", tagClass: "tag-online", desc: "Où louer un vélo dans le Nord et le Pas-de-Calais — annuaire ADAV.", location: "Région", link: "https://droitauvelo.org/Ou-louer-un-velo-dans-le-Nord-et-dans-le-Pas-de-Calais" },
-          { name: "Location vélo Dunkerque", tag: "local", tagClass: "", desc: "Service de location de vélo proposé par l'office de tourisme de Dunkerque.", location: "Dunkerque", link: "https://www.dunkerque-tourisme.fr/decouvrir/destination-velo/louer-un-velo/" },
-        ]
-      },
-      "Rouler en peloton": {
-        icon: "🚵",
-        actors: [
-          { name: "Culture Vélo Lille", tag: "local", tagClass: "", desc: "Magasin spécialisé à Lille avec une communauté de cyclistes passionnés.", location: "Lille" },
-          { name: "Les Baroudeurs avec Lulu", tag: "communauté", tagClass: "tag-asso", desc: "Groupe de cyclistes pour les aventures collectives en Hauts-de-France.", location: "Hauts-de-France" },
-          { name: "De Straat Café", tag: "lieu vélo", tagClass: "tag-event", desc: "Café vélo à Lille, lieu de convivialité pour les cyclistes de la région.", location: "Lille" },
-        ]
-      },
-      "Apprendre à faire du vélo": {
-        icon: "🎓",
-        actors: [
-          { name: "ADAV — Droit au Vélo", tag: "associatif", tagClass: "tag-asso", desc: "Association qui propose des séances d'apprentissage du vélo adulte et enfant à Lille.", location: "Lille", link: "https://solidarites.lille.fr/acteur/573/3-association-droit-au-velo-adav.htm" },
-          { name: "MCF — Btwin Village", tag: "formation", tagClass: "", desc: "Moniteur Cycliste Fédéral au Btwin Village — cours individuels et collectifs.", location: "Villeneuve-d'Ascq" },
-          { name: "Vélodrome de Roubaix", tag: "formation", tagClass: "", desc: "Cours d'initiation et perfectionnement vélo au vélodrome iconique.", location: "Roubaix" },
-        ]
-      },
-      "Découvrir & s'inspirer": {
-        icon: "💡",
-        actors: [
-          { name: "Maison des Mobilités Durables", tag: "lieu", tagClass: "tag-event", desc: "Espace ressource sur les mobilités durables à Lille : expositions, événements, conseils.", location: "Lille" },
-          { name: "Calendrier des événements vélo HdF", tag: "agenda", tagClass: "tag-online", desc: "Agenda collaboratif des événements cyclistes en Hauts-de-France.", location: "Région", link: "https://wind-rhodium-dc5.notion.site/18f1d74b98228227a094016e33e0d336?v=af71d74b98228208ac4388e50dcb59c8" },
-        ]
-      },
-      "Faire un vélo sur mesure": {
-        icon: "🛠",
-        actors: [
-          { name: "La Fraise", tag: "local", tagClass: "", desc: "Fabricant de vélos sur mesure à Roubaix. Chaque vélo est unique, conçu selon votre morphologie et vos usages.", location: "Roubaix" },
-        ]
-      },
-    }
+    needs: [
+      { key: "S'equipper", icon: "🛒", actors: [
+        { name: "Vera Cycling", tag: "local", tagClass: "", desc: "Gapettes de velo made in France. Accessoires fabriques localement, qualite artisanale.", loc: "Hauts-de-France" },
+        { name: "La Vie est Belt", tag: "local", tagClass: "", desc: "Ceintures upcyclees a partir de chambre a air. Accessoire velo eco-concu et made in HdF.", loc: "Hauts-de-France" },
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Revendeur de materiel velo d'aventure et du quotidien haut de gamme.", loc: "Hauts-de-France" },
+        { name: "La Fraise", tag: "local", tagClass: "", desc: "Velo sur mesure, fabrication artisanale.", loc: "Roubaix" },
+        { name: "Decathlon", tag: "commerce", tagClass: "national", desc: "Grande surface sport - large gamme velo, accessoires, equipements.", loc: "Hauts-de-France" },
+        { name: "V'Lille", tag: "location", tagClass: "event", desc: "Service de location de velo a Lille. Ideal pour tester avant d'acheter.", loc: "Lille" }
+      ]},
+      { key: "Reparer son velo", icon: "🔧", actors: [
+        { name: "Heureux Cyclage - ateliers HdF", tag: "associatif", tagClass: "asso", desc: "Reseau d'ateliers d'auto-reparation associatifs. Apprenez a reparer vous-meme avec de l'outillage partage.", loc: "Region", link: "https://www.heureux-cyclage.org/les-ateliers-en-france.html" },
+        { name: "Les Mains dans le Guidon", tag: "local", tagClass: "", desc: "Atelier d'auto-reparation prive. Accompagnement technique en autonomie.", loc: "Hauts-de-France" },
+        { name: "La Bici", tag: "local", tagClass: "", desc: "Annuaire et reparateur velo a Lille. Retrouvez les reparateurs de proximite.", loc: "Lille" },
+        { name: "Decathlon SAV velo", tag: "commerce", tagClass: "national", desc: "Service reparation et entretien velo en atelier.", loc: "Hauts-de-France" }
+      ]},
+      { key: "Partir en vacances a velo", icon: "🏕️", actors: [
+        { name: "Les Micro-aventures de Lulu", tag: "inspiration", tagClass: "event", desc: "Recits et ressources pour partir en velo-voyage en autonomie depuis les HdF.", loc: "Hauts-de-France", link: "https://www.lesmicroaventuresdelulu.com/" },
+        { name: "France Velo Tourisme", tag: "national", tagClass: "national", desc: "Portail officiel du velo tourisme en France : itineraires, hebergements labelises Accueil Velo.", loc: "National", link: "https://www.francevelotourisme.com/accueil-velo" },
+        { name: "TER SNCF HdF - Velo a bord", tag: "transport", tagClass: "online", desc: "Tout savoir sur l'embarquement de votre velo dans les TER des Hauts-de-France.", loc: "Region", link: "https://www.ter.sncf.com/hauts-de-france/services-contacts/services/embarquer-votre-velo-bord" },
+        { name: "Location velo Nord & Pas-de-Calais", tag: "annuaire", tagClass: "online", desc: "Ou louer un velo dans le Nord et le Pas-de-Calais - annuaire ADAV.", loc: "Region", link: "https://droitauvelo.org/Ou-louer-un-velo-dans-le-Nord-et-dans-le-Pas-de-Calais" },
+        { name: "Location velo Dunkerque", tag: "local", tagClass: "", desc: "Service de location de velo de l'office de tourisme de Dunkerque.", loc: "Dunkerque", link: "https://www.dunkerque-tourisme.fr/decouvrir/destination-velo/louer-un-velo/" }
+      ]},
+      { key: "Rouler en peloton", icon: "🚵", actors: [
+        { name: "Culture Velo Lille", tag: "local", tagClass: "", desc: "Magasin specialise a Lille avec une communaute de cyclistes passionnes.", loc: "Lille" },
+        { name: "Les Baroudeurs avec Lulu", tag: "communaute", tagClass: "asso", desc: "Groupe de cyclistes pour les aventures collectives en Hauts-de-France.", loc: "Hauts-de-France" },
+        { name: "De Straat Cafe", tag: "lieu velo", tagClass: "event", desc: "Cafe velo a Lille, lieu de convivialite pour les cyclistes de la region.", loc: "Lille" }
+      ]},
+      { key: "Apprendre a faire du velo", icon: "🎓", actors: [
+        { name: "ADAV - Droit au Velo", tag: "associatif", tagClass: "asso", desc: "Seances d'apprentissage du velo adulte et enfant a Lille.", loc: "Lille", link: "https://solidarites.lille.fr/acteur/573/3-association-droit-au-velo-adav.htm" },
+        { name: "MCF - Btwin Village", tag: "formation", tagClass: "", desc: "Moniteur Cycliste Federal au Btwin Village - cours individuels et collectifs.", loc: "Villeneuve-d'Ascq" },
+        { name: "Velodrome de Roubaix", tag: "formation", tagClass: "", desc: "Cours d'initiation et perfectionnement velo au velodrome iconique.", loc: "Roubaix" }
+      ]},
+      { key: "Decouvrir & s'inspirer", icon: "💡", actors: [
+        { name: "Maison des Mobilites Durables", tag: "lieu", tagClass: "event", desc: "Espace ressource sur les mobilites durables a Lille : expositions, evenements, conseils.", loc: "Lille" },
+        { name: "Calendrier des evenements velo HdF", tag: "agenda", tagClass: "online", desc: "Agenda collaboratif des evenements cyclistes en Hauts-de-France.", loc: "Region", link: "https://wind-rhodium-dc5.notion.site/18f1d74b98228227a094016e33e0d336?v=af71d74b98228208ac4388e50dcb59c8" }
+      ]},
+      { key: "Faire un velo sur mesure", icon: "🛠️", actors: [
+        { name: "La Fraise", tag: "local", tagClass: "", desc: "Fabricant de velos sur mesure a Roubaix. Chaque velo est unique, concu selon votre morphologie.", loc: "Roubaix" }
+      ]}
+    ]
   },
-
-  employeur: {
-    label: "Je suis un pro",
-    needs: {
-      "S'équiper": {
-        icon: "🛒",
-        actors: [
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Équipement vélo haut de gamme pour collaborateurs. Solutions d'équipement BtoB.", location: "Hauts-de-France" },
-          { name: "Programme Marguerite", tag: "programme", tagClass: "tag-online", desc: "Programme national d'accompagnement à la mobilité vélo en entreprise, avec solutions d'équipement.", location: "National", link: "https://www.programme-marguerite.fr/" },
-          { name: "Decathlon Pro", tag: "commerce", tagClass: "tag-national", desc: "Offre dédiée aux entreprises pour équiper les collaborateurs à prix compétitif.", location: "Hauts-de-France" },
-          { name: "Catalogue Employeur ProVélo / Alvéole", tag: "national", tagClass: "tag-national", desc: "Catalogues et solutions dédiées aux employeurs pour faciliter le passage au vélo.", location: "National" },
-        ]
-      },
-      "Plan de mobilité employeur": {
-        icon: "📋",
-        actors: [
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Accompagnement des employeurs dans l'élaboration de leur plan de mobilité vélo.", location: "Hauts-de-France" },
-          { name: "Réseau Alliances + Booster Rev3", tag: "réseau", tagClass: "tag-asso", desc: "Appui au plan de mobilité employeur dans le cadre de la démarche RSE régionale.", location: "Hauts-de-France" },
-        ]
-      },
-      "S'inspirer & échanger entre pairs": {
-        icon: "🔗",
-        actors: [
-          { name: "Événements Tous à Biclou", tag: "événement", tagClass: "tag-event", desc: "Rendez-vous collectifs pour les acteurs vélo et mobilité douce du territoire.", location: "Hauts-de-France" },
-          { name: "Communauté Déclic Mobilités", tag: "communauté", tagClass: "tag-asso", desc: "Réseau d'acteurs engagés dans la transition mobilité. Newsletter + événements.", location: "Région" },
-          { name: "Communauté Employeur ProVélo", tag: "national", tagClass: "tag-national", desc: "Réseau national d'employeurs engagés pour le vélo au travail.", location: "National" },
-          { name: "World Forum for a Responsible Economy", tag: "événement", tagClass: "tag-event", desc: "Forum international à Lille sur l'économie responsable, dont la mobilité durable.", location: "Lille" },
-          { name: "Newsletter Déclic Mobilité", tag: "media", tagClass: "tag-online", desc: "Veille régulière sur les actualités mobilité durable en Hauts-de-France.", location: "Région" },
-          { name: "Newsletter 2R Aventure", tag: "media", tagClass: "tag-online", desc: "Actualités, conseils et offres de 2R Aventure pour les employeurs cyclistes.", location: "Région" },
-        ]
-      },
-      "Se labelliser": {
-        icon: "🏅",
-        actors: [
-          { name: "Label Employeur ProVélo", tag: "label", tagClass: "tag-national", desc: "Reconnaissance nationale des employeurs qui facilitent la pratique du vélo.", location: "National" },
-          { name: "Label Accueil Vélo", tag: "label", tagClass: "tag-national", desc: "Labellisation pour les structures qui accueillent les cyclistes dans de bonnes conditions.", location: "National" },
-        ]
-      },
-      "Organiser un événement": {
-        icon: "🎪",
-        actors: [
-          { name: "STAB Vélodrome", tag: "lieu", tagClass: "tag-event", desc: "Vélodrome André Pérez — infrastructure vélo emblématique pour organiser vos événements corporate.", location: "Hauts-de-France" },
-          { name: "Maison des Mobilités de Lille", tag: "lieu", tagClass: "tag-event", desc: "Espace événementiel dédié aux mobilités durables, disponible pour conférences et ateliers.", location: "Lille" },
-        ]
-      },
-      "Animer une démarche": {
-        icon: "🚩",
-        actors: [
-          { name: "Challenge Mai à Vélo", tag: "challenge", tagClass: "tag-event", desc: "Défi national inter-entreprises en mai. Engagez vos équipes pour le mois du vélo.", location: "National" },
-          { name: "Challenge Hauts-de-France Mobilité", tag: "challenge", tagClass: "tag-event", desc: "Challenge régional pour encourager les mobilités actives dans les entreprises HdF.", location: "Région" },
-          { name: "Parking Day", tag: "événement", tagClass: "tag-event", desc: "Journée internationale de réappropriation de l'espace public. Idéal pour sensibiliser.", location: "International" },
-        ]
-      },
-      "Logistique & livraisons à vélo": {
-        icon: "📦",
-        actors: [
-          { name: "CargoElan", tag: "local", tagClass: "", desc: "Service de livraison urbaine à vélo cargo en Hauts-de-France.", location: "Hauts-de-France", link: "https://cargoelan.fr/" },
-          { name: "Programme Marguerite", tag: "programme", tagClass: "tag-online", desc: "Solutions de logistique douce et d'équipement cargo pour les entreprises.", location: "National", link: "https://www.programme-marguerite.fr/" },
-          { name: "Lille Bike", tag: "local", tagClass: "", desc: "Opérateur de livraison à vélo cargo sur Lille et sa métropole.", location: "Lille" },
-        ]
-      },
-    }
+  pro: {
+    label: "Je suis un pro (employeur)",
+    needs: [
+      { key: "S'equipper", icon: "🛒", actors: [
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Equipement velo haut de gamme pour collaborateurs. Solutions BtoB.", loc: "Hauts-de-France" },
+        { name: "Programme Marguerite", tag: "programme", tagClass: "online", desc: "Programme national d'accompagnement a la mobilite velo en entreprise.", loc: "National", link: "https://www.programme-marguerite.fr/" },
+        { name: "Decathlon Pro", tag: "commerce", tagClass: "national", desc: "Offre dediee aux entreprises pour equiper les collaborateurs.", loc: "Hauts-de-France" },
+        { name: "Catalogue Provelo / Alveole", tag: "national", tagClass: "national", desc: "Catalogues et solutions dedicees aux employeurs pour faciliter le passage au velo.", loc: "National" }
+      ]},
+      { key: "Plan de mobilite employeur", icon: "📋", actors: [
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Accompagnement des employeurs dans l'elaboration de leur plan de mobilite velo.", loc: "Hauts-de-France" },
+        { name: "Reseau Alliances + Booster Rev3", tag: "reseau", tagClass: "asso", desc: "Appui au plan de mobilite employeur dans le cadre de la demarche RSE regionale.", loc: "Hauts-de-France" }
+      ]},
+      { key: "S'inspirer & echanger", icon: "🔗", actors: [
+        { name: "Evenements Tous a Biclou", tag: "evenement", tagClass: "event", desc: "Rendez-vous collectifs pour les acteurs velo et mobilite douce du territoire.", loc: "Hauts-de-France" },
+        { name: "Communaute Declic Mobilites", tag: "communaute", tagClass: "asso", desc: "Reseau d'acteurs engages dans la transition mobilite. Newsletter + evenements.", loc: "Region" },
+        { name: "Communaute Employeur ProVelo", tag: "national", tagClass: "national", desc: "Reseau national d'employeurs engages pour le velo au travail.", loc: "National" },
+        { name: "World Forum for a Responsible Economy", tag: "evenement", tagClass: "event", desc: "Forum international a Lille sur l'economie responsable.", loc: "Lille" },
+        { name: "Newsletter Declic Mobilite", tag: "media", tagClass: "online", desc: "Veille reguliere sur les actualites mobilite durable en Hauts-de-France.", loc: "Region" },
+        { name: "Newsletter 2R Aventure", tag: "media", tagClass: "online", desc: "Actualites, conseils et offres de 2R Aventure pour les employeurs cyclistes.", loc: "Region" }
+      ]},
+      { key: "Se labeliser", icon: "🏅", actors: [
+        { name: "Label Employeur ProVelo", tag: "label", tagClass: "national", desc: "Reconnaissance nationale des employeurs qui facilitent la pratique du velo.", loc: "National" },
+        { name: "Label Accueil Velo", tag: "label", tagClass: "national", desc: "Labellisation pour les structures qui accueillent les cyclistes dans de bonnes conditions.", loc: "National" }
+      ]},
+      { key: "Organiser un evenement", icon: "🎪", actors: [
+        { name: "STAB Velodrome", tag: "lieu", tagClass: "event", desc: "Velodrome Andre Perez - infrastructure velo emblematique pour vos evenements corporate.", loc: "Hauts-de-France" },
+        { name: "Maison des Mobilites de Lille", tag: "lieu", tagClass: "event", desc: "Espace evenementiel dedie aux mobilites durables.", loc: "Lille" }
+      ]},
+      { key: "Animer une demarche", icon: "🚩", actors: [
+        { name: "Challenge Mai a Velo", tag: "challenge", tagClass: "event", desc: "Defi national inter-entreprises en mai. Engagez vos equipes pour le mois du velo.", loc: "National" },
+        { name: "Challenge Hauts-de-France Mobilite", tag: "challenge", tagClass: "event", desc: "Challenge regional pour encourager les mobilites actives dans les entreprises HdF.", loc: "Region" },
+        { name: "Parking Day", tag: "evenement", tagClass: "event", desc: "Journee internationale de reappropriation de l'espace public. Ideal pour sensibiliser.", loc: "International" }
+      ]},
+      { key: "Logistique & livraisons a velo", icon: "📦", actors: [
+        { name: "CargoElan", tag: "local", tagClass: "", desc: "Service de livraison urbaine a velo cargo en Hauts-de-France.", loc: "Hauts-de-France", link: "https://cargoelan.fr/" },
+        { name: "Programme Marguerite", tag: "programme", tagClass: "online", desc: "Solutions de logistique douce et d'equipement cargo pour les entreprises.", loc: "National", link: "https://www.programme-marguerite.fr/" },
+        { name: "Lille Bike", tag: "local", tagClass: "", desc: "Operateur de livraison a velo cargo sur Lille et sa metropole.", loc: "Lille" }
+      ]}
+    ]
   },
-
   collectivite: {
-    label: "Je suis une collectivité",
-    needs: {
-      "Équiper mes agents": {
-        icon: "🛒",
-        actors: [
-          { name: "Recycle & Moi", tag: "local", tagClass: "", desc: "Alternative locale et économie circulaire pour l'équipement en vélos reconditionnés.", location: "Hauts-de-France" },
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Équipement vélo haut de gamme pour agents — favoriser le tissu local plutôt que l'UGAP.", location: "Hauts-de-France" },
-          { name: "Catalogue Employeur ProVélo / Alvéole", tag: "national", tagClass: "tag-national", desc: "Catalogues spécialisés pour collectivités souhaitant équiper leurs agents.", location: "National" },
-        ]
-      },
-      "S'inspirer & partager": {
-        icon: "🔗",
-        actors: [
-          { name: "Événements Tous à Biclou", tag: "événement", tagClass: "tag-event", desc: "Rendez-vous collectifs pour les acteurs mobilité des territoires.", location: "Hauts-de-France" },
-          { name: "Communauté Déclic Mobilités", tag: "communauté", tagClass: "tag-asso", desc: "Réseau régional d'acteurs engagés mobilité durable.", location: "Région" },
-          { name: "World Forum for a Responsible Economy", tag: "événement", tagClass: "tag-event", desc: "Forum de référence sur l'économie responsable.", location: "Lille" },
-          { name: "Newsletter du CREM", tag: "media", tagClass: "tag-online", desc: "Centre de Ressources en Éco-Mobilité — veille et ressources pour les collectivités.", location: "Région" },
-          { name: "Newsletter 2R Aventure", tag: "media", tagClass: "tag-online", desc: "Actualités mobilité vélo territoriale.", location: "Région" },
-        ]
-      },
-      "Former les collaborateurs": {
-        icon: "🎓",
-        actors: [
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Formation des agents à la pratique du vélo et à l'animation mobilité.", location: "Hauts-de-France" },
-          { name: "Booster Rev3", tag: "réseau", tagClass: "tag-asso", desc: "Accompagnement et formation à la transition énergétique et mobilité.", location: "Hauts-de-France" },
-          { name: "Déclic Mobilités", tag: "formation", tagClass: "tag-asso", desc: "Formations et ateliers sur les mobilités actives.", location: "Région" },
-          { name: "CCI Grand Lille — Fresque de la Mobilité", tag: "formation", tagClass: "tag-event", desc: "Atelier collaboratif de sensibilisation aux enjeux de la mobilité durable.", location: "Lille" },
-          { name: "CEREMA", tag: "national", tagClass: "tag-national", desc: "Centre d'expertise sur les risques, l'environnement, la mobilité et l'aménagement.", location: "National" },
-        ]
-      },
-      "Expérimenter": {
-        icon: "🧪",
-        actors: [
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Accompagnement d'expérimentations mobilité vélo sur votre territoire.", location: "Hauts-de-France" },
-        ]
-      },
-      "Animer une démarche": {
-        icon: "🚩",
-        actors: [
-          { name: "Challenge Mai à Vélo", tag: "challenge", tagClass: "tag-event", desc: "Mobilisez vos agents et habitants pour le mois du vélo.", location: "National" },
-          { name: "Challenge Hauts-de-France Mobilité", tag: "challenge", tagClass: "tag-event", desc: "Défi régional de mobilités actives.", location: "Région" },
-          { name: "Parking Day", tag: "événement", tagClass: "tag-event", desc: "Journée de sensibilisation à la place de la voiture en ville.", location: "International" },
-        ]
-      },
-    }
+    label: "Je suis une collectivite",
+    needs: [
+      { key: "Equiper mes agents", icon: "🛒", actors: [
+        { name: "Recycle & Moi", tag: "local", tagClass: "", desc: "Alternative locale et economie circulaire pour l'equipement en velos reconditiones.", loc: "Hauts-de-France" },
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Equipement velo haut de gamme pour agents - favoriser le tissu local plutot que l'UGAP.", loc: "Hauts-de-France" },
+        { name: "Catalogue Provelo / Alveole", tag: "national", tagClass: "national", desc: "Catalogues specialises pour collectivites souhaitant equiper leurs agents.", loc: "National" }
+      ]},
+      { key: "S'inspirer & partager", icon: "🔗", actors: [
+        { name: "Evenements Tous a Biclou", tag: "evenement", tagClass: "event", desc: "Rendez-vous collectifs pour les acteurs mobilite des territoires.", loc: "Hauts-de-France" },
+        { name: "Communaute Declic Mobilites", tag: "communaute", tagClass: "asso", desc: "Reseau regional d'acteurs engages mobilite durable.", loc: "Region" },
+        { name: "World Forum for a Responsible Economy", tag: "evenement", tagClass: "event", desc: "Forum de reference sur l'economie responsable.", loc: "Lille" },
+        { name: "Newsletter du CREM", tag: "media", tagClass: "online", desc: "Centre de Ressources en Eco-Mobilite - veille et ressources pour les collectivites.", loc: "Region" },
+        { name: "Newsletter 2R Aventure", tag: "media", tagClass: "online", desc: "Actualites mobilite velo territoriale.", loc: "Region" }
+      ]},
+      { key: "Former les collaborateurs", icon: "🎓", actors: [
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Formation des agents a la pratique du velo et a l'animation mobilite.", loc: "Hauts-de-France" },
+        { name: "Booster Rev3", tag: "reseau", tagClass: "asso", desc: "Accompagnement et formation a la transition energetique et mobilite.", loc: "Hauts-de-France" },
+        { name: "Declic Mobilites", tag: "formation", tagClass: "asso", desc: "Formations et ateliers sur les mobilites actives.", loc: "Region" },
+        { name: "CCI Grand Lille - Fresque de la Mobilite", tag: "formation", tagClass: "event", desc: "Atelier collaboratif de sensibilisation aux enjeux de la mobilite durable.", loc: "Lille" },
+        { name: "CEREMA", tag: "national", tagClass: "national", desc: "Centre d'expertise sur les risques, l'environnement, la mobilite et l'amenagement.", loc: "National" }
+      ]},
+      { key: "Experimenter", icon: "🧪", actors: [
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Accompagnement d'experimentations mobilite velo sur votre territoire.", loc: "Hauts-de-France" }
+      ]},
+      { key: "Animer une demarche", icon: "🚩", actors: [
+        { name: "Challenge Mai a Velo", tag: "challenge", tagClass: "event", desc: "Mobilisez vos agents et habitants pour le mois du velo.", loc: "National" },
+        { name: "Challenge Hauts-de-France Mobilite", tag: "challenge", tagClass: "event", desc: "Defi regional de mobilites actives.", loc: "Region" },
+        { name: "Parking Day", tag: "evenement", tagClass: "event", desc: "Journee de sensibilisation a la place de la voiture en ville.", loc: "International" }
+      ]}
+    ]
   },
-
   scolaire: {
-    label: "Je suis un établissement scolaire",
-    needs: {
-      "Équiper l'établissement": {
-        icon: "🛒",
-        actors: [
-          { name: "Catalogue Employeur ProVélo / Alvéole", tag: "national", tagClass: "tag-national", desc: "Solutions d'équipement vélo pour les établissements scolaires.", location: "National" },
-          { name: "Recycle & Moi", tag: "local", tagClass: "", desc: "Vélos reconditionnés pour équiper les établissements à moindre coût.", location: "Hauts-de-France" },
-          { name: "2R Aventure", tag: "local", tagClass: "", desc: "Matériel vélo et sécurité pour les établissements scolaires.", location: "Hauts-de-France" },
-        ]
-      },
-      "Animer une démarche": {
-        icon: "🚩",
-        actors: [
-          { name: "Challenge Écomobilité Scolaire", tag: "challenge", tagClass: "tag-event", desc: "Défi pour engager les élèves et familles dans des pratiques de mobilité durable.", location: "Région" },
-          { name: "Jeu des 7 Familles de la Mobilité Durable", tag: "outil pédago", tagClass: "tag-online", desc: "Outil pédagogique ludique pour sensibiliser aux mobilités alternatives.", location: "National" },
-          { name: "Savoir-Rouler à l'École", tag: "programme", tagClass: "tag-national", desc: "Programme national pour apprendre à faire du vélo en milieu scolaire.", location: "National" },
-          { name: "Génération Vélo", tag: "programme", tagClass: "tag-national", desc: "Programme FUB pour développer le vélo chez les jeunes.", location: "National", link: "https://generationvelo.fr/" },
-        ]
-      },
-      "S'inspirer": {
-        icon: "💡",
-        actors: [
-          { name: "Newsletter du CREM", tag: "media", tagClass: "tag-online", desc: "Ressources et actualités sur l'éco-mobilité à destination des acteurs éducatifs.", location: "Région" },
-        ]
-      },
-    }
+    label: "Je suis un etablissement scolaire",
+    needs: [
+      { key: "Equiper l'etablissement", icon: "🛒", actors: [
+        { name: "Catalogue Provelo / Alveole", tag: "national", tagClass: "national", desc: "Solutions d'equipement velo pour les etablissements scolaires.", loc: "National" },
+        { name: "Recycle & Moi", tag: "local", tagClass: "", desc: "Velos reconditiones pour equiper les etablissements a moindre cout.", loc: "Hauts-de-France" },
+        { name: "2R Aventure", tag: "local", tagClass: "", desc: "Materiel velo et securite pour les etablissements scolaires.", loc: "Hauts-de-France" }
+      ]},
+      { key: "Animer une demarche", icon: "🚩", actors: [
+        { name: "Challenge Ecomobilite Scolaire", tag: "challenge", tagClass: "event", desc: "Defi pour engager les eleves et familles dans des pratiques de mobilite durable.", loc: "Region" },
+        { name: "Jeu des 7 Familles de la Mobilite Durable", tag: "pedagogique", tagClass: "online", desc: "Outil pedagogique ludique pour sensibiliser aux mobilites alternatives.", loc: "National" },
+        { name: "Savoir-Rouler a l'Ecole", tag: "programme", tagClass: "national", desc: "Programme national pour apprendre a faire du velo en milieu scolaire.", loc: "National" },
+        { name: "Generation Velo", tag: "programme", tagClass: "national", desc: "Programme FUB pour developper le velo chez les jeunes.", loc: "National", link: "https://generationvelo.fr/" }
+      ]},
+      { key: "S'inspirer", icon: "💡", actors: [
+        { name: "Newsletter du CREM", tag: "media", tagClass: "online", desc: "Ressources et actualites sur l'eco-mobilite a destination des acteurs educatifs.", loc: "Region" }
+      ]}
+    ]
   },
-
   industriel: {
     label: "Je suis un industriel",
-    needs: {
-      "Se faire accompagner": {
-        icon: "🤝",
-        actors: [
-          { name: "Transalley", tag: "pôle", tagClass: "tag-asso", desc: "Pôle d'excellence sur les transports et mobilités durables en Hauts-de-France. Accompagnement R&D et industriel.", location: "Hauts-de-France" },
-          { name: "ARIA — Association Régionale des Industriels Automobiles", tag: "réseau", tagClass: "tag-asso", desc: "Réseau industriel régional qui accompagne aussi les acteurs de la mobilité douce.", location: "Hauts-de-France" },
-        ]
-      },
-      "S'entourer & échanger": {
-        icon: "🔗",
-        actors: [
-          { name: "Cercle Vélo", tag: "réseau", tagClass: "tag-asso", desc: "Réseau d'acteurs de la filière vélo pour échanger sur les enjeux industriels et stratégiques.", location: "National" },
-          { name: "Transalley", tag: "pôle", tagClass: "tag-asso", desc: "Hub d'innovation transport — accès à un écosystème d'industriels et de chercheurs.", location: "Hauts-de-France" },
-        ]
-      },
-      "Former les salariés": {
-        icon: "🎓",
-        actors: [
-          { name: "INCM — Institut National de la Compétence Mobilité", tag: "formation", tagClass: "tag-national", desc: "Centre de formation spécialisé dans les métiers de la mobilité et du cycle.", location: "National" },
-        ]
-      },
-    }
+    needs: [
+      { key: "Se faire accompagner", icon: "🤝", actors: [
+        { name: "Transalley", tag: "pole", tagClass: "asso", desc: "Pole d'excellence sur les transports et mobilites durables en Hauts-de-France. Accompagnement R&D et industriel.", loc: "Hauts-de-France" },
+        { name: "ARIA", tag: "reseau", tagClass: "asso", desc: "Association Regionale des Industriels Automobiles - accompagne aussi les acteurs de la mobilite douce.", loc: "Hauts-de-France" }
+      ]},
+      { key: "S'entourer & echanger", icon: "🔗", actors: [
+        { name: "Cercle Velo", tag: "reseau", tagClass: "asso", desc: "Reseau d'acteurs de la filiere velo pour echanger sur les enjeux industriels et strategiques.", loc: "National" },
+        { name: "Transalley", tag: "pole", tagClass: "asso", desc: "Hub d'innovation transport - acces a un ecosysteme d'industriels et de chercheurs.", loc: "Hauts-de-France" }
+      ]},
+      { key: "Former les salaries", icon: "🎓", actors: [
+        { name: "INCM - Institut National de la Competence Mobilite", tag: "formation", tagClass: "national", desc: "Centre de formation specialise dans les metiers de la mobilite et du cycle.", loc: "National" }
+      ]}
+    ]
   }
 };
 
-let currentProfile = null;
-let currentNeed = null;
-
-function selectProfile(profile) {
-  currentProfile = profile;
-  document.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`[data-profile="${profile}"]`).classList.add('active');
-  
-  const data = DATA[profile];
-  const needsGrid = document.getElementById('needsGrid');
-  document.getElementById('profileTitle').textContent = data.label;
-  needsGrid.innerHTML = '';
-  
-  Object.entries(data.needs).forEach(([need, val]) => {
-    const btn = document.createElement('button');
-    btn.className = 'need-btn';
-    btn.dataset.need = need;
-    btn.innerHTML = `<span>${val.icon}</span> ${need}`;
-    btn.onclick = () => selectNeed(need);
-    needsGrid.appendChild(btn);
+function onProfileChange() {
+  var profile = document.getElementById('profileSelect').value;
+  var needsSection = document.getElementById('needs-section');
+  var resultsSection = document.getElementById('results-section');
+  resultsSection.style.display = 'none';
+  if (!profile) { needsSection.style.display = 'none'; return; }
+  var data = DATA[profile];
+  document.getElementById('profile-title').textContent = data.label;
+  var grid = document.getElementById('needs-grid');
+  grid.innerHTML = '';
+  data.needs.forEach(function(need, i) {
+    var id = 'need_' + i;
+    var input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'need';
+    input.id = id;
+    input.value = String(i);
+    input.className = 'need-radio';
+    input.addEventListener('change', function() { showActors(profile, i); });
+    var label = document.createElement('label');
+    label.htmlFor = id;
+    label.className = 'need-label';
+    label.textContent = need.icon + ' ' + need.key;
+    grid.appendChild(input);
+    grid.appendChild(label);
   });
-
-  document.getElementById('needsSection').classList.add('visible');
-  document.getElementById('resultsSection').classList.remove('visible');
-  document.getElementById('resetBtn').classList.add('visible');
-  currentNeed = null;
+  needsSection.style.display = 'block';
 }
 
-function selectNeed(need) {
-  currentNeed = need;
-  document.querySelectorAll('.need-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`[data-need="${need}"]`).classList.add('active');
-
-  const actors = DATA[currentProfile].needs[need].actors;
-  const grid = document.getElementById('actorsGrid');
+function showActors(profile, idx) {
+  var need = DATA[profile].needs[idx];
+  var actors = need.actors;
+  var grid = document.getElementById('actors-grid');
   grid.innerHTML = '';
-
-  actors.forEach(actor => {
-    const card = document.createElement('div');
-    card.className = 'actor-card';
-    card.innerHTML = `
-      <div class="actor-tag ${actor.tagClass || ''}">${actor.tag}</div>
-      <div class="actor-name">${actor.name}</div>
-      <div class="actor-desc">${actor.desc}</div>
-      ${actor.location ? `<div class="actor-location">📍 ${actor.location}</div>` : ''}
-      ${actor.link ? `<div class="actor-links"><a href="${actor.link}" target="_blank" class="actor-link">→ Accéder</a></div>` : ''}
-    `;
+  actors.forEach(function(actor) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    var tag = document.createElement('span');
+    tag.className = 'card-tag ' + (actor.tagClass || '');
+    tag.textContent = actor.tag;
+    card.appendChild(tag);
+    var name = document.createElement('div');
+    name.className = 'card-name';
+    name.textContent = actor.name;
+    card.appendChild(name);
+    var desc = document.createElement('div');
+    desc.className = 'card-desc';
+    desc.textContent = actor.desc;
+    card.appendChild(desc);
+    if (actor.loc) {
+      var loc = document.createElement('div');
+      loc.className = 'card-loc';
+      loc.textContent = '📍 ' + actor.loc;
+      card.appendChild(loc);
+    }
+    if (actor.link) {
+      var a = document.createElement('a');
+      a.href = actor.link;
+      a.target = '_blank';
+      a.className = 'card-link';
+      a.textContent = 'Acceder';
+      card.appendChild(a);
+    }
     grid.appendChild(card);
   });
-
-  document.getElementById('resultsTitle').textContent = `${DATA[currentProfile].needs[need].icon} ${need}`;
-  document.getElementById('resultsCount').textContent = `${actors.length} acteur${actors.length > 1 ? 's' : ''} référencé${actors.length > 1 ? 's' : ''}`;
-  document.getElementById('resultsSection').classList.add('visible');
-  document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('results-title').textContent = need.icon + ' ' + need.key;
+  document.getElementById('results-count').textContent = actors.length + ' acteur' + (actors.length > 1 ? 's' : '') + ' references';
+  var rs = document.getElementById('results-section');
+  rs.style.display = 'block';
+  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-function reset() {
-  curre
+</script>
+</body>
+</html>
