@@ -106,7 +106,7 @@ footer a { color: var(--lime); text-decoration: none; }
     <option value="">-- Choisissez votre profil --</option>
     <option value="particulier">Particulier</option>
     <option value="pro">Pro (employeur)</option>
-    <option value="collectivite">Collectivite</option>
+    <option value="Collectivité">Collectivité</option>
     <option value="scolaire">Etablissement scolaire</option>
     <option value="industriel">Industriel</option>
   </select>
@@ -149,7 +149,7 @@ var DATA = {
   particulier: {
     label: "Je suis un particulier",
     needs: [
-      { key: "S'equipper", icon: "🛒", actors: [
+      { key: "S'équiper", icon: "🛒", actors: [
         { name: "Vera Cycling", tag: "local", tagClass: "", desc: "Gapettes de velo made in France. Accessoires fabriques localement, qualite artisanale.", loc: "Hauts-de-France" },
         { name: "La Vie est Belt", tag: "local", tagClass: "", desc: "Ceintures upcyclees a partir de chambre a air. Accessoire velo eco-concu et made in HdF.", loc: "Hauts-de-France" },
         { name: "2R Aventure", tag: "local", tagClass: "", desc: "Revendeur de materiel velo d'aventure et du quotidien haut de gamme.", loc: "Hauts-de-France" },
@@ -157,8 +157,8 @@ var DATA = {
         { name: "Decathlon", tag: "commerce", tagClass: "national", desc: "Grande surface sport - large gamme velo, accessoires, equipements.", loc: "Hauts-de-France" },
         { name: "V'Lille", tag: "location", tagClass: "event", desc: "Service de location de velo a Lille. Ideal pour tester avant d'acheter.", loc: "Lille" }
       ]},
-      { key: "Reparer son velo", icon: "🔧", actors: [
-        { name: "Heureux Cyclage - ateliers HdF", tag: "associatif", tagClass: "asso", desc: "Reseau d'ateliers d'auto-reparation associatifs. Apprenez a reparer vous-meme avec de l'outillage partage.", loc: "Region", link: "https://www.heureux-cyclage.org/les-ateliers-en-france.html" },
+      { key: "Réparer son velo", icon: "🔧", actors: [
+        { name: "Heureux Cyclage - ateliers HdF", tag: "associatif", tagClass: "asso", desc: "Reseau d'ateliers d'auto-reparation associatifs. Apprenez a Réparer vous-meme avec de l'outillage partage.", loc: "Region", link: "https://www.heureux-cyclage.org/les-ateliers-en-france.html" },
         { name: "Les Mains dans le Guidon", tag: "local", tagClass: "", desc: "Atelier d'auto-reparation prive. Accompagnement technique en autonomie.", loc: "Hauts-de-France" },
         { name: "La Bici", tag: "local", tagClass: "", desc: "Annuaire et reparateur velo a Lille. Retrouvez les reparateurs de proximite.", loc: "Lille" },
         { name: "Decathlon SAV velo", tag: "commerce", tagClass: "national", desc: "Service reparation et entretien velo en atelier.", loc: "Hauts-de-France" }
@@ -168,19 +168,19 @@ var DATA = {
         { name: "France Velo Tourisme", tag: "national", tagClass: "national", desc: "Portail officiel du velo tourisme en France : itineraires, hebergements labelises Accueil Velo.", loc: "National", link: "https://www.francevelotourisme.com/accueil-velo" },
         { name: "TER SNCF HdF - Velo a bord", tag: "transport", tagClass: "online", desc: "Tout savoir sur l'embarquement de votre velo dans les TER des Hauts-de-France.", loc: "Region", link: "https://www.ter.sncf.com/hauts-de-france/services-contacts/services/embarquer-votre-velo-bord" },
         { name: "Location velo Nord & Pas-de-Calais", tag: "annuaire", tagClass: "online", desc: "Ou louer un velo dans le Nord et le Pas-de-Calais - annuaire ADAV.", loc: "Region", link: "https://droitauvelo.org/Ou-louer-un-velo-dans-le-Nord-et-dans-le-Pas-de-Calais" },
-        { name: "Location velo Dunkerque", tag: "local", tagClass: "", desc: "Service de location de velo de l'office de tourisme de Dunkerque.", loc: "Dunkerque", link: "https://www.dunkerque-tourisme.fr/decouvrir/destination-velo/louer-un-velo/" }
+        { name: "Location velo Dunkerque", tag: "local", tagClass: "", desc: "Service de location de velo de l'office de tourisme de Dunkerque.", loc: "Dunkerque", link: "https://www.dunkerque-tourisme.fr/découvrir/destination-velo/louer-un-velo/" }
       ]},
       { key: "Rouler en peloton", icon: "🚵", actors: [
         { name: "Culture Velo Lille", tag: "local", tagClass: "", desc: "Magasin specialise a Lille avec une communaute de cyclistes passionnes.", loc: "Lille" },
         { name: "Les Baroudeurs avec Lulu", tag: "communaute", tagClass: "asso", desc: "Groupe de cyclistes pour les aventures collectives en Hauts-de-France.", loc: "Hauts-de-France" },
         { name: "De Straat Cafe", tag: "lieu velo", tagClass: "event", desc: "Cafe velo a Lille, lieu de convivialite pour les cyclistes de la region.", loc: "Lille" }
       ]},
-      { key: "Apprendre a faire du velo", icon: "🎓", actors: [
+      { key: "Apprendre à faire du velo", icon: "🎓", actors: [
         { name: "ADAV - Droit au Velo", tag: "associatif", tagClass: "asso", desc: "Seances d'apprentissage du velo adulte et enfant a Lille.", loc: "Lille", link: "https://solidarites.lille.fr/acteur/573/3-association-droit-au-velo-adav.htm" },
         { name: "MCF - Btwin Village", tag: "formation", tagClass: "", desc: "Moniteur Cycliste Federal au Btwin Village - cours individuels et collectifs.", loc: "Villeneuve-d'Ascq" },
         { name: "Velodrome de Roubaix", tag: "formation", tagClass: "", desc: "Cours d'initiation et perfectionnement velo au velodrome iconique.", loc: "Roubaix" }
       ]},
-      { key: "Decouvrir & s'inspirer", icon: "💡", actors: [
+      { key: "découvrir & s'inspirer", icon: "💡", actors: [
         { name: "Maison des Mobilites Durables", tag: "lieu", tagClass: "event", desc: "Espace ressource sur les mobilites durables a Lille : expositions, evenements, conseils.", loc: "Lille" },
         { name: "Calendrier des evenements velo HdF", tag: "agenda", tagClass: "online", desc: "Agenda collaboratif des evenements cyclistes en Hauts-de-France.", loc: "Region", link: "https://wind-rhodium-dc5.notion.site/18f1d74b98228227a094016e33e0d336?v=af71d74b98228208ac4388e50dcb59c8" }
       ]},
@@ -192,7 +192,7 @@ var DATA = {
   pro: {
     label: "Je suis un pro (employeur)",
     needs: [
-      { key: "S'equipper", icon: "🛒", actors: [
+      { key: "S'équiper", icon: "🛒", actors: [
         { name: "2R Aventure", tag: "local", tagClass: "", desc: "Equipement velo haut de gamme pour collaborateurs. Solutions BtoB.", loc: "Hauts-de-France" },
         { name: "Programme Marguerite", tag: "programme", tagClass: "online", desc: "Programme national d'accompagnement a la mobilite velo en entreprise.", loc: "National", link: "https://www.programme-marguerite.fr/" },
         { name: "Decathlon Pro", tag: "commerce", tagClass: "national", desc: "Offre dediee aux entreprises pour equiper les collaborateurs.", loc: "Hauts-de-France" },
@@ -230,19 +230,19 @@ var DATA = {
       ]}
     ]
   },
-  collectivite: {
-    label: "Je suis une collectivite",
+  Collectivité: {
+    label: "Je suis une Collectivité",
     needs: [
       { key: "Equiper mes agents", icon: "🛒", actors: [
         { name: "Recycle & Moi", tag: "local", tagClass: "", desc: "Alternative locale et economie circulaire pour l'equipement en velos reconditiones.", loc: "Hauts-de-France" },
         { name: "2R Aventure", tag: "local", tagClass: "", desc: "Equipement velo haut de gamme pour agents - favoriser le tissu local plutot que l'UGAP.", loc: "Hauts-de-France" },
-        { name: "Catalogue Provelo / Alveole", tag: "national", tagClass: "national", desc: "Catalogues specialises pour collectivites souhaitant equiper leurs agents.", loc: "National" }
+        { name: "Catalogue Provelo / Alveole", tag: "national", tagClass: "national", desc: "Catalogues specialises pour Collectivités souhaitant equiper leurs agents.", loc: "National" }
       ]},
       { key: "S'inspirer & partager", icon: "🔗", actors: [
         { name: "Evenements Tous a Biclou", tag: "evenement", tagClass: "event", desc: "Rendez-vous collectifs pour les acteurs mobilite des territoires.", loc: "Hauts-de-France" },
         { name: "Communaute Declic Mobilites", tag: "communaute", tagClass: "asso", desc: "Reseau regional d'acteurs engages mobilite durable.", loc: "Region" },
         { name: "World Forum for a Responsible Economy", tag: "evenement", tagClass: "event", desc: "Forum de reference sur l'economie responsable.", loc: "Lille" },
-        { name: "Newsletter du CREM", tag: "media", tagClass: "online", desc: "Centre de Ressources en Eco-Mobilite - veille et ressources pour les collectivites.", loc: "Region" },
+        { name: "Newsletter du CREM", tag: "media", tagClass: "online", desc: "Centre de Ressources en Eco-Mobilite - veille et ressources pour les Collectivités.", loc: "Region" },
         { name: "Newsletter 2R Aventure", tag: "media", tagClass: "online", desc: "Actualites mobilite velo territoriale.", loc: "Region" }
       ]},
       { key: "Former les collaborateurs", icon: "🎓", actors: [
@@ -273,7 +273,7 @@ var DATA = {
       { key: "Animer une demarche", icon: "🚩", actors: [
         { name: "Challenge Ecomobilite Scolaire", tag: "challenge", tagClass: "event", desc: "Defi pour engager les eleves et familles dans des pratiques de mobilite durable.", loc: "Region" },
         { name: "Jeu des 7 Familles de la Mobilite Durable", tag: "pedagogique", tagClass: "online", desc: "Outil pedagogique ludique pour sensibiliser aux mobilites alternatives.", loc: "National" },
-        { name: "Savoir-Rouler a l'Ecole", tag: "programme", tagClass: "national", desc: "Programme national pour apprendre a faire du velo en milieu scolaire.", loc: "National" },
+        { name: "Savoir-Rouler a l'Ecole", tag: "programme", tagClass: "national", desc: "Programme national pour apprendre à faire du velo en milieu scolaire.", loc: "National" },
         { name: "Generation Velo", tag: "programme", tagClass: "national", desc: "Programme FUB pour developper le velo chez les jeunes.", loc: "National", link: "https://generationvelo.fr/" }
       ]},
       { key: "S'inspirer", icon: "💡", actors: [
@@ -373,3 +373,4 @@ function showActors(profile, idx) {
 </script>
 </body>
 </html>
+
